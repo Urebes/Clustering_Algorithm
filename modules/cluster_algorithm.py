@@ -13,8 +13,9 @@ def k_means(X, y, random_state_int):
 
     # check how many of the samples were correctly labeled
     correct_labels = sum(y == labels)/float(y.size)
+    result = correct_labels
 
-    print('Accuracy score: {0:0.2f}'. format(correct_labels))
+    #print('Accuracy score: {0:0.2f}'. format(correct_labels))
 
     #find out the result after removing each one of the attribute
     accuracy = {}
@@ -26,7 +27,7 @@ def k_means(X, y, random_state_int):
         correct_labels = sum(y == labels)/float(y.size)
         accuracy[column] = correct_labels
         #print(Xs.shape)
-        # print('Accuracy score after dropping %s {0:0.2f}'. format(correct_labels)%column)
+        #print('Accuracy score after dropping %s {0:0.2f}'. format(correct_labels)%column)
 
     #plot the accuracies against each removed attribute
     x,z = zip(*accuracy.items())
@@ -41,10 +42,11 @@ def k_means(X, y, random_state_int):
         #print(chr(ord('a')+i),item)
         i+=1
 
-    plt.plot(xs, z)
-    plt.xlabel('Attributes Removed')
-    plt.ylabel('Accuracy')
-    # plt.show()
+    # plt.plot(xs, z)
+    # plt.xlabel('Attributes Removed')
+    # plt.ylabel('Accuracy')
+    #plt.show()
+    return result
      # accuracy = {k: v for k, v in sorted(accuracy.items(), key=lambda item: item[1],reverse=True)}
     # for k,  v in accuracy.items():
     #     print(k,v)
