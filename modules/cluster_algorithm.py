@@ -1,9 +1,9 @@
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
-def k_means(X, y):
+def k_means(X, y, random_state_int):
     #since the label is only 0 and 1, so 2 clusters (no need to find the maximum # of clusters)
-    kmeans = KMeans(n_clusters=2, random_state=0) 
+    kmeans = KMeans(n_clusters=2, random_state=random_state_int) 
     
     kmeans.fit(X)
 
@@ -14,7 +14,7 @@ def k_means(X, y):
     # check how many of the samples were correctly labeled
     correct_labels = sum(y == labels)/float(y.size)
 
-    print('Accuracy score with all attr: {0:0.2f}'. format(correct_labels))
+    print('Accuracy score: {0:0.2f}'. format(correct_labels))
 
     #find out the result after removing each one of the attribute
     accuracy = {}
@@ -26,7 +26,7 @@ def k_means(X, y):
         correct_labels = sum(y == labels)/float(y.size)
         accuracy[column] = correct_labels
         #print(Xs.shape)
-        print('Accuracy score after dropping %s {0:0.2f}'. format(correct_labels)%column)
+        # print('Accuracy score after dropping %s {0:0.2f}'. format(correct_labels)%column)
 
     #plot the accuracies against each removed attribute
     x,z = zip(*accuracy.items())
@@ -38,13 +38,13 @@ def k_means(X, y):
     for item in x:
         attr_dict[chr(ord('a')+i)]=item
         xs.append(chr(ord('a')+i))
-        print(chr(ord('a')+i),item)
+        #print(chr(ord('a')+i),item)
         i+=1
 
     plt.plot(xs, z)
     plt.xlabel('Attributes Removed')
     plt.ylabel('Accuracy')
-    plt.show()
+    # plt.show()
      # accuracy = {k: v for k, v in sorted(accuracy.items(), key=lambda item: item[1],reverse=True)}
     # for k,  v in accuracy.items():
     #     print(k,v)
